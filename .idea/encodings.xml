@@ -60,6 +60,9 @@
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/util/DateChooser.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/util/MyFont.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/util/PropertiesUtil.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/utils/DateChooser.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/utils/MyFont.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/utils/PropertiesUtil.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/ChatFrame.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/LoginFrame.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/PasswordPanel.java" charset="GBK" />
