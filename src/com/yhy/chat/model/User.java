@@ -11,7 +11,8 @@ public class User implements Serializable {
     private String name;
     private String password;
     private List<User> firends;
-    private int sex, age;
+    private int sex;//1£ºmale 2:female
+    private int age;
     private String birthday;
     private String imgPath;
     private boolean login;

@@ -126,7 +126,7 @@ public class UserDao extends BaseDao {
     //添加好友函数
     public boolean addFriend(User user1, User user2) {
         Connection conn = getConnection();
-        String sql = "insert into friends values(\"%s\",\"%s\");";
+        String sql = "insert into friends values(?,?)";
         PreparedStatement ps = this.prepare(conn, sql);
         try {
             ps.setInt(1, user1.getId());
