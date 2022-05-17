@@ -18,7 +18,7 @@ import java.util.*;
  **/
 public class UserListFrame extends JFrame {
 
-	public static final int FRAME_WIDTH = 300;
+	public static final int FRAME_WIDTH = 400;
 	public static final int FRAME_HEIGHT = 550;
 
 	private UserListPanel userListPanel = new UserListPanel();
@@ -30,7 +30,7 @@ public class UserListFrame extends JFrame {
 	private JButton btn_chatAll = new JButton("群聊");
 
 	public UserListFrame() {
-		super("聊天系统--用户列表");
+		super("InstantChat");
 		this.setLocation(1000, 100);
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -166,13 +166,15 @@ public class UserListFrame extends JFrame {
 
 		lbl_name.setText(ChatClient.getInstance().getUser().getName());
 		lbl_name.setBounds(60, 20, 300, 30);
+		lbl_name.setFont(new Font("menlo", Font.BOLD,16));
 		this.add(lbl_name);
-
+//模拟个性签名
 		lbl_sign.setText(ChatClient.getInstance().getUser().getSign());
 		if (lbl_sign.getText().equals("")) {
 			lbl_sign.setText("请输入个性签名");
 		}
 		lbl_sign.setBounds(20, 60, 300, 30);
+		//输入监视器
 		lbl_sign.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				txt_sign.setText(lbl_sign.getText());
@@ -183,7 +185,7 @@ public class UserListFrame extends JFrame {
 			}
 		});
 		this.add(lbl_sign);
-
+		//修改个性签名
 		txt_sign.setBounds(20, 60, 200, 30);
 		txt_sign.addActionListener(new ActionListener() {
 			@Override
@@ -198,14 +200,14 @@ public class UserListFrame extends JFrame {
 		});
 		txt_sign.setVisible(false);
 		this.add(txt_sign);
-
+		//好友列表
 		userListPanel.setBounds(0, 0, FRAME_WIDTH - 30, 350);
 		JScrollPane sp = new JScrollPane();
 		sp.getViewport().add(userListPanel);
 		sp.setBounds(0, 100, FRAME_WIDTH - 10, 350);
 		this.add(sp);
 
-		btn_chatAll.setBounds(50, 460, 50, 25);
+		btn_chatAll.setBounds(50, 460, 70, 25);
 		btn_chatAll.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

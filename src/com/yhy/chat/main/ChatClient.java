@@ -41,9 +41,11 @@ public class ChatClient {
 	public static void main(String[] args) {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		try {
+			//UI·ç¸ñ
 			//UIManager.setLookAndFeel(new SubstanceOfficeBlue2007LookAndFeel());
 			//UIManager.setLookAndFeel(new SubstanceAutumnLookAndFeel());
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+			//UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}

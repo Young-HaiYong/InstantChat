@@ -77,7 +77,7 @@ public class PopupFrame {
 
 	public static class Tim1 implements ActionListener {// 控制窗口关闭时透明度的渐变
 		public void actionPerformed(ActionEvent e) {
-			value1 -= 0.04f;
+			value1 -= 0.02f;
 			if (value1 >= 0.02f) {
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override

@@ -54,8 +54,8 @@ public class UserInfoPanel extends JPanel {
 			bg.add(b);
 		}
 
-		JLabel l = new JLabel("选择头像");
-		l.setBounds(10, 10, 50, 30);
+		JLabel l = new JLabel("选择头像：");
+		l.setBounds(10, 10, 80, 30);
 		this.add(l);
 
 		this.setRadioBtn(btn_head1, HEAD1_PATH);
@@ -74,7 +74,7 @@ public class UserInfoPanel extends JPanel {
 		btn_head4.setBounds(180, 40, 50, 50);
 		this.add(btn_head4);
 
-		l = new JLabel("用户名");
+		l = new JLabel("用户名：");
 		l.setBounds(10, 100, 50, 30);
 		this.add(l);
 
@@ -82,7 +82,7 @@ public class UserInfoPanel extends JPanel {
 		txt_name.setText(user.getName());
 		this.add(txt_name);
 
-		l = new JLabel("签名");
+		l = new JLabel("签名：");
 		l.setBounds(10, 140, 50, 30);
 		this.add(l);
 
@@ -90,7 +90,7 @@ public class UserInfoPanel extends JPanel {
 		txt_sign.setText(user.getSign());
 		this.add(txt_sign);
 
-		l = new JLabel("性别");
+		l = new JLabel("性别：");
 		l.setBounds(10, 180, 50, 30);
 		this.add(l);
 
@@ -98,7 +98,7 @@ public class UserInfoPanel extends JPanel {
 		com_sex.setSelectedIndex(user.getSex());
 		this.add(com_sex);
 
-		l = new JLabel("年龄");
+		l = new JLabel("年龄：");
 		l.setBounds(150, 180, 60, 30);
 		this.add(l);
 
@@ -106,8 +106,8 @@ public class UserInfoPanel extends JPanel {
 		txt_age.setText(user.getAge() + "");
 		this.add(txt_age);
 
-		l = new JLabel("出生日期");
-		l.setBounds(10, 240, 50, 30);
+		l = new JLabel("出生日期：");
+		l.setBounds(10, 240, 80, 30);
 		this.add(l);
 
 		try {
@@ -115,14 +115,14 @@ public class UserInfoPanel extends JPanel {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		txt_birthday.setBounds(60, 240, 150, 30);
+		txt_birthday.setBounds(80, 240, 150, 30);
 		this.add(txt_birthday);
 
-		btn_submit.setBounds(100, 290, 50, 20);
+		btn_submit.setBounds(100, 290, 70, 20);
 		btn_submit.addActionListener(new Monitor());
 		this.add(btn_submit);
 
-		btn_cancel.setBounds(180, 290, 50, 20);
+		btn_cancel.setBounds(180, 290, 70, 20);
 		btn_cancel.addActionListener(new Monitor());
 		this.add(btn_cancel);
 

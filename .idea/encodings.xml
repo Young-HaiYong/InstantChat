@@ -4,6 +4,9 @@
     <file url="file://$PROJECT_DIR$/lib/PropertiesUtil.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/lib/mysql-connector-java-5.1.14-bin.jar" charset="GBK" />
     <file url="file://$PROJECT_DIR$/lib/substance-5.3.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/main" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/pictures" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/sounds" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/chat/dao/BaseDao.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/chat/dao/UserDao.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/chat/main/ChatClient.java" charset="GBK" />
@@ -42,6 +45,9 @@
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/main/ChatClient.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/main/NetClient.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/main/Server.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/main/main/ChatClient.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/main/main/NetClient.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/main/main/Server.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/model/User.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/model/msg/AcceptFileMsg.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/model/msg/AcceptFriendMsg.java" charset="GBK" />
@@ -73,5 +79,7 @@
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/UserInfoPanel.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/UserListFrame.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/UserListPanel.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/assets/icon.jpg" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/config.properties" charset="GBK" />
   </component>
 </project>

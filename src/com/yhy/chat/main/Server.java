@@ -38,6 +38,7 @@ public class Server {
 		try {
 			ss = new ServerSocket(Integer.parseInt(properties
 					.get("SERVER_TCP_PORT")));
+			System.out.println("");
 			while (ss != null) {
 				Socket s = ss.accept();
 				InputStream is = s.getInputStream();

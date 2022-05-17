@@ -16,7 +16,7 @@ public class UserInfoFrame extends JFrame {
 	private User user;
 
 	public UserInfoFrame(User user) {
-		super("个人信息修改");
+		super("<个人信息修改>");
 		this.user = user;
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

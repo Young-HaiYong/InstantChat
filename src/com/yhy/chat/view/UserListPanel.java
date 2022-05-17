@@ -19,19 +19,23 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * @author: 杨海勇
+ * 好友界面按钮功能实现
  **/
 public class UserListPanel extends JPanel {
 
 	private List<User> userList = new ArrayList<User>();
 	private List<UserInfoPanel> panelList = new ArrayList<UserInfoPanel>();
-	private JLabel lbl_onlineFriend = new JLabel("在线好友");
-	private JLabel lbl_offlineFriend = new JLabel("离线好友");
-	private JLabel lbl_onlinePerson = new JLabel("在线陌生人");
+	private JLabel lbl_onlineFriend = new JLabel("<在线好友>");
+	private JLabel lbl_offlineFriend = new JLabel("<离线好友>");
+	private JLabel lbl_onlinePerson = new JLabel("<在线的人>");
 	private boolean onlineFriendFlag = true, offlineFriendFlag = true,
 			onlinePersonFlag = true;
 
 	public UserListPanel() {
-		this.setLayout(new GridLayout(10, 1));
+		this.setLayout(new GridLayout(15, 1));
+		lbl_onlineFriend.setFont(new Font("menlo",Font.BOLD,18));
+		lbl_offlineFriend.setFont(new Font("menlo",Font.BOLD,18));
+		lbl_onlinePerson.setFont(new Font("menlo",Font.BOLD,18));
 		lbl_onlineFriend.addMouseListener(new MouseMonitor());
 		lbl_offlineFriend.addMouseListener(new MouseMonitor());
 		lbl_onlinePerson.addMouseListener(new MouseMonitor());

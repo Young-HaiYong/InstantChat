@@ -29,22 +29,22 @@ public class PasswordPanel extends JPanel {
 	}
 	//修改密码窗口
 	public void init() {
-		JLabel l = new JLabel("原密码");
+		JLabel l = new JLabel("原密码：");
 		l.setBounds(10, 10, 50, 25);
 		this.add(l);
 
 		txt_old.setBounds(70, 10, 120, 25);
 		this.add(txt_old);
 
-		l = new JLabel("新密码");
+		l = new JLabel("新密码：");
 		l.setBounds(10, 45, 50, 25);
 		this.add(l);
 
 		txt_new1.setBounds(70, 45, 120, 25);
 		this.add(txt_new1);
 
-		l = new JLabel("新密码2");
-		l.setBounds(10, 80, 50, 25);
+		l = new JLabel("确认密码：");
+		l.setBounds(10, 80, 70, 25);
 		this.add(l);
 
 		txt_new2.setBounds(70, 80, 120, 25);
