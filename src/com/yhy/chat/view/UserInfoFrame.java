@@ -16,10 +16,12 @@ public class UserInfoFrame extends JFrame {
 	private User user;
 
 	public UserInfoFrame(User user) {
-		super("<个人信息修改>");
+		super("<个人信息>");
 		this.user = user;
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setIconImage(new ImageIcon(LoginFrame.class.getResource("/com/yhy/chat/view/assets/user.png")).getImage());
+		this.setBackground(new Color(255, 255, 255));
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		init();
@@ -31,12 +33,12 @@ public class UserInfoFrame extends JFrame {
 			user = ChatClient.getInstance().getUser();
 		}
 
-		JTabbedPane tp = new JTabbedPane(JTabbedPane.LEFT);
+		JTabbedPane tp = new JTabbedPane(JTabbedPane.TOP);
 		this.add(tp, BorderLayout.CENTER);
 
-		tp.add("基本信息", new UserInfoPanel(this));
+		tp.addTab("基本信息", new UserInfoPanel(this));
 		if (user.equals(ChatClient.getInstance().getUser())) {
-			tp.add("修改密码", new PasswordPanel(this));
+			tp.addTab("修改密码", new PasswordPanel(this));
 		}
 	}
 

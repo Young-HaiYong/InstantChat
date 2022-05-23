@@ -38,7 +38,7 @@ public class Server {
 		try {
 			ss = new ServerSocket(Integer.parseInt(properties
 					.get("SERVER_TCP_PORT")));
-			System.out.println("");
+			System.out.println("服务器启动成功！！");
 			while (ss != null) {
 				Socket s = ss.accept();
 				InputStream is = s.getInputStream();

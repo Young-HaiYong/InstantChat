@@ -4,6 +4,7 @@ import com.yhy.chat.main.ChatClient;
 import com.yhy.chat.model.User;
 import com.yhy.chat.model.msg.UpdateUserMsg;
 import com.yhy.chat.utils.DateChooser;
+import com.yhy.chat.utils.MyFont;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,10 +20,10 @@ public class UserInfoPanel extends JPanel {
 	public static final SimpleDateFormat FORMAT = new SimpleDateFormat(
 			"yyyy-MM-dd");
 
-	public static final String HEAD1_PATH = "pictures\\h1.jpg";
-	public static final String HEAD2_PATH = "pictures\\h2.jpg";
-	public static final String HEAD3_PATH = "pictures\\h3.jpg";
-	public static final String HEAD4_PATH = "pictures\\h4.jpg";
+	public static final String HEAD1_PATH = "pictures\\h1.png";
+	public static final String HEAD2_PATH = "pictures\\h2.png";
+	public static final String HEAD3_PATH = "pictures\\h3.png";
+	public static final String HEAD4_PATH = "pictures\\h4.png";
 
 	private User user;
 	private UserInfoFrame frame;
@@ -36,6 +37,7 @@ public class UserInfoPanel extends JPanel {
 	private JRadioButton btn_head2 = new JRadioButton();
 	private JRadioButton btn_head3 = new JRadioButton();
 	private JRadioButton btn_head4 = new JRadioButton();
+	private JRadioButton btn_headself = new JRadioButton();
 	private JRadioButton[] btn_head = new JRadioButton[] { btn_head1,
 			btn_head2, btn_head3, btn_head4 };
 	private JButton btn_submit = new JButton("确定");
@@ -54,52 +56,66 @@ public class UserInfoPanel extends JPanel {
 			bg.add(b);
 		}
 
-		JLabel l = new JLabel("选择头像：");
+		JLabel l = new JLabel("头像：");
+		l.setFont(MyFont.getSonFont());
 		l.setBounds(10, 10, 80, 30);
 		this.add(l);
 
+		this.setRadioBtn(btn_headself,user.getImgPath());
+		btn_headself.setBounds(10, 40, 50, 50);
+		btn_headself.setVisible(false);
+		this.add(btn_headself);
+
 		this.setRadioBtn(btn_head1, HEAD1_PATH);
-		btn_head1.setBounds(10, 40, 50, 50);
+		btn_head1.setBounds(60, 40, 50, 50);
 		this.add(btn_head1);
 
 		this.setRadioBtn(btn_head2, HEAD2_PATH);
-		btn_head2.setBounds(60, 40, 50, 50);
+		btn_head2.setBounds(120, 40, 50, 50);
 		this.add(btn_head2);
 
 		this.setRadioBtn(btn_head3, HEAD3_PATH);
-		btn_head3.setBounds(120, 40, 50, 50);
+		btn_head3.setBounds(180, 40, 50, 50);
 		this.add(btn_head3);
 
 		this.setRadioBtn(btn_head4, HEAD4_PATH);
-		btn_head4.setBounds(180, 40, 50, 50);
+		btn_head4.setBounds(240, 40, 50, 50);
 		this.add(btn_head4);
 
+
+
+
 		l = new JLabel("用户名：");
-		l.setBounds(10, 100, 50, 30);
+		l.setFont(MyFont.getSonFont());
+		l.setBounds(10, 100, 60, 30);
 		this.add(l);
 
-		txt_name.setBounds(60, 100, 120, 30);
+		txt_name.setBounds(70, 100, 120, 30);
 		txt_name.setText(user.getName());
 		this.add(txt_name);
 
 		l = new JLabel("签名：");
+		l.setFont(MyFont.getSonFont());
 		l.setBounds(10, 140, 50, 30);
 		this.add(l);
 
-		txt_sign.setBounds(60, 140, 180, 30);
+		txt_sign.setBounds(70, 140, 180, 30);
 		txt_sign.setText(user.getSign());
 		this.add(txt_sign);
 
 		l = new JLabel("性别：");
+		l.setFont(MyFont.getSonFont());
 		l.setBounds(10, 180, 50, 30);
 		this.add(l);
 
-		com_sex.setBounds(60, 180, 50, 30);
+		com_sex.setBounds(70, 180, 50, 30);
+		com_sex.setFont(MyFont.getSonFont());
 		com_sex.setSelectedIndex(user.getSex());
 		this.add(com_sex);
 
 		l = new JLabel("年龄：");
-		l.setBounds(150, 180, 60, 30);
+		l.setFont(MyFont.getSonFont());
+		l.setBounds(145, 180, 60, 30);
 		this.add(l);
 
 		txt_age.setBounds(200, 180, 50, 30);
@@ -107,7 +123,8 @@ public class UserInfoPanel extends JPanel {
 		this.add(txt_age);
 
 		l = new JLabel("出生日期：");
-		l.setBounds(10, 240, 80, 30);
+		l.setFont(MyFont.getSonFont());
+		l.setBounds(10, 240, 70, 30);
 		this.add(l);
 
 		try {
@@ -118,11 +135,13 @@ public class UserInfoPanel extends JPanel {
 		txt_birthday.setBounds(80, 240, 150, 30);
 		this.add(txt_birthday);
 
-		btn_submit.setBounds(100, 290, 70, 20);
+		btn_submit.setBounds(100, 290, 60, 30);
+		btn_submit.setFont(MyFont.getSonFont());
 		btn_submit.addActionListener(new Monitor());
 		this.add(btn_submit);
 
-		btn_cancel.setBounds(180, 290, 70, 20);
+		btn_cancel.setBounds(180, 290, 60, 30);
+		btn_cancel.setFont(MyFont.getSonFont());
 		btn_cancel.addActionListener(new Monitor());
 		this.add(btn_cancel);
 
@@ -131,11 +150,18 @@ public class UserInfoPanel extends JPanel {
 			btn_head2.setEnabled(false);
 			btn_head3.setEnabled(false);
 			btn_head4.setEnabled(false);
+			btn_head1.setVisible(false);
+			btn_head2.setVisible(false);
+			btn_head3.setVisible(false);
+			btn_head4.setVisible(false);
+			btn_headself.setVisible(true);
 			txt_name.setEditable(false);
 			txt_sign.setEditable(false);
 			com_sex.setEnabled(false);
 			txt_age.setEditable(false);
 			txt_birthday.setEnabled(false);
+			btn_submit.setVisible(false);
+			btn_cancel.setVisible(false);
 		}
 	}
 

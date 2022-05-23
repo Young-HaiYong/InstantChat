@@ -1,11 +1,11 @@
 package com.yhy.chat.view;
 
+
 import com.yhy.chat.main.ChatClient;
 import com.yhy.chat.model.User;
-import com.yhy.chat.model.msg.AcceptFileMsg;
-import com.yhy.chat.model.msg.ChatMsg;
-import com.yhy.chat.model.msg.RefuseFileMsg;
-import com.yhy.chat.model.msg.SendFileMsg;
+import com.yhy.chat.model.file.MsgManager;
+import com.yhy.chat.model.msg.*;
+import com.yhy.chat.utils.MyFont;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -24,6 +24,10 @@ import java.awt.image.ColorConvertOp;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,11 +37,15 @@ public class ChatFrame extends JFrame {
 
     public static final int FRAME_WIDTH = 500;
     public static final int FRAME_HEIGHT = 480;
+    public static final SimpleDateFormat FORMAT = new SimpleDateFormat(
+            "yyyy-MM-dd HH:mm");
 
     private File file;
+   // private Date date = new Date();
     private FileOutputStream fos;
     private long length;
-    private User user, targetUser;
+    private User user;
+    private User targetUser;
     private JTextPane txt_input = new JTextPane() {
         @SuppressWarnings("unchecked")
         public void paste() {
@@ -66,7 +74,7 @@ public class ChatFrame extends JFrame {
                         .isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
                     try {
                         if (!targetUser.isLogin()) {
-                            JOptionPane.showMessageDialog(null, "不允许向离线用户发送文件",
+                            JOptionPane.showMessageDialog(null, "离线用户无法发送文件",
                                     "错误", JOptionPane.ERROR_MESSAGE);
                             return;
                         }
@@ -95,12 +103,10 @@ public class ChatFrame extends JFrame {
     private JTextPane txt_display = new JTextPane();
     private JComboBox com_size = new JComboBox(new String[]{"10", "11", "12",
             "14", "16", "20", "24", "32", "36"});
-    private JButton btn_color = new JButton("改颜色");
-    private JButton btn_bold = new JButton("粗体");
-    private JButton btn_italic = new JButton("斜体");
     private JButton btn_sendFile = new JButton("发送文件");
     private JButton btn_acceptFile = new JButton("接收文件");
     private JButton btn_refuseFile = new JButton("拒绝文件");
+    private JButton btn_chattingRecords = new JButton("聊天记录");
     private JLabel lbl_head = new JLabel();
     private JLabel lbl_name = new JLabel();
     private JLabel lbl_file = new JLabel() {
@@ -115,17 +121,25 @@ public class ChatFrame extends JFrame {
         }
     };
     private JProgressBar fileBar = new JProgressBar();
+    private ArrayList<ChatMsg> msgs = new ArrayList<>();
 
     private Color color = Color.BLACK;
-    private boolean bold = false, italic = false, underline = false;
 
     public ChatFrame(User user, User targetUser) {
-        super("与  " + (targetUser == null ? "大家" : targetUser.getName())
+        super(user.getName()+ "  正在与  " + (targetUser == null ? "大家" : targetUser.getName())
                 + " 聊天");
         this.user = user;
         this.targetUser = targetUser;
         this.addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
+                //保存文件逻辑实现
+                try {
+                    MsgManager.saveMsg(user, targetUser, msgs);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+
                 for (int i = 0; i < ChatClient.getInstance().getChatFrameList()
                         .size(); i++) {
                     if (ChatClient.getInstance().getChatFrameList().get(i) == ChatFrame.this) {
@@ -136,6 +150,13 @@ public class ChatFrame extends JFrame {
                 ChatFrame.this.dispose();
             }
         });
+//        ImageIcon image = new ImageIcon(LoginFrame.class.getResource("/com/yhy/chat/view/assets/user.png"));
+//        image.setImage(image.getImage().getScaledInstance(140,80,Image.SCALE_DEFAULT));
+//        JLabel lbl_title = new JLabel(image);
+//        lbl_title.setBounds(72, -10, 200, 100);
+//        this.add(lbl_title);
+
+        this.setIconImage(new ImageIcon(ChatFrame.class.getResource("/com/yhy/chat/view/assets/user.png")).getImage());
         this.setLocation(150, 100);
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setResizable(false);
@@ -143,11 +164,14 @@ public class ChatFrame extends JFrame {
         this.setVisible(true);
     }
 
+    //聊天界面初始化
     public void init() {
+
         this.setLayout(null);
         JScrollPane sp = new JScrollPane(txt_input);
         sp.setBounds(20, 330, 350, 100);
         this.add(sp);
+
         //获取好友信息
         if (targetUser != null) {
             this.setTargetUser(targetUser);
@@ -166,44 +190,38 @@ public class ChatFrame extends JFrame {
         txt_display.setEditable(false);
         sp.setBounds(20, 50, 350, 250);
         this.add(sp);
-        //四个按钮功能
+
+
+        //按钮功能-字号大小
         Monitor m = new Monitor();
 
-        com_size.setBounds(20, 305, 70, 20);
-        com_size.setFont(new Font("menlo", Font.BOLD, 12));
-        com_size.setSelectedIndex(2);
+        com_size.setBounds(20, 305, 50, 20);
+        com_size.setFont(new Font("menlo", Font.BOLD, 13));
+        com_size.setSelectedIndex(5);
         com_size.addActionListener(m);
         this.add(com_size);
 
-        btn_color.setBounds(99, 305, 90, 20);
-        btn_color.setFont(new Font("menlo", Font.BOLD, 12));
-        btn_color.addActionListener(m);
-        this.add(btn_color);
-
-        btn_bold.setBounds(160, 305, 90, 20);
-        btn_bold.setFont(new Font("menlo", Font.BOLD, 12));
-        btn_bold.addActionListener(m);
-        this.add(btn_bold);
-
-        btn_italic.setBounds(220, 305, 90, 20);
-        btn_italic.setFont(new Font("menlo", Font.BOLD, 12));
-        btn_italic.addActionListener(m);
-        this.add(btn_italic);
-
+        //聊天记录
+        btn_chattingRecords.setBounds(380, 90, 90, 30);
+        btn_chattingRecords.setFont(new Font("menlo", Font.BOLD, 12));
+        btn_chattingRecords.addActionListener(m);
+        this.add(btn_chattingRecords);
         //发送文件功能
-        btn_sendFile.setBounds(380, 180, 100, 30);
-        btn_sendFile.setFont(new Font("menlo",Font.BOLD,12));
+        btn_sendFile.setBounds(380, 130, 90, 30);
+        btn_sendFile.setFont(new Font("menlo", Font.BOLD, 12));
         btn_sendFile.addActionListener(m);
         if (targetUser != null) {
             this.add(btn_sendFile);
         }
-
-        btn_acceptFile.setBounds(390, 120, 90, 30);
+        //接受文件
+        btn_acceptFile.setBounds(380, 170, 90, 30);
+        btn_acceptFile.setFont(new Font("menlo", Font.BOLD, 12));
         btn_acceptFile.addActionListener(m);
         btn_acceptFile.setVisible(false);
         this.add(btn_acceptFile);
-
-        btn_refuseFile.setBounds(390, 160, 90, 30);
+        //拒绝接收文件
+        btn_refuseFile.setBounds(380, 210, 90, 30);
+        btn_refuseFile.setFont(new Font("menlo", Font.BOLD, 12));
         btn_refuseFile.addActionListener(m);
         btn_refuseFile.setVisible(false);
         this.add(btn_refuseFile);
@@ -218,6 +236,7 @@ public class ChatFrame extends JFrame {
         txt_input.addKeyListener(new KeyMonitor());
     }
 
+    //监控发送类型按钮
     class Monitor implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             SimpleAttributeSet sas = new SimpleAttributeSet();
@@ -226,20 +245,6 @@ public class ChatFrame extends JFrame {
             if (e.getSource() == com_size) {
                 StyleConstants.setFontSize(sas, Integer.parseInt(com_size
                         .getSelectedItem().toString()));
-            } else if (e.getSource() == btn_color) {
-                Color c = JColorChooser.showDialog(null, "颜色选择", null);
-                if (c != null) {
-                    color = c;
-                    StyleConstants.setForeground(sas, color);
-                }
-            } else if (e.getSource() == btn_bold) {
-                bold = !bold;
-                btn_bold.setSelected(bold);
-                StyleConstants.setBold(sas, bold);
-            } else if (e.getSource() == btn_italic) {
-                italic = !italic;
-                btn_italic.setSelected(italic);
-                StyleConstants.setItalic(sas, italic);
             } else if (e.getSource() == btn_sendFile) {
                 if (!targetUser.isLogin()) {
                     JOptionPane.showMessageDialog(null, "不允许向离线用户发送文件", "错误",
@@ -295,6 +300,13 @@ public class ChatFrame extends JFrame {
                     msg.setTargetUser(targetUser);
                     msg.send();
                 }
+            } else if (e.getSource() == btn_chattingRecords) {
+                //阅读聊天记录实现
+                try {
+                    ChatRecordFrame chatRecordFrame = new ChatRecordFrame(user,targetUser);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
             txt_input.getStyledDocument().setCharacterAttributes(0,
                     txt_input.getStyledDocument().getLength() + 1, sas, false);
@@ -302,6 +314,7 @@ public class ChatFrame extends JFrame {
         }
     }
 
+    //监控文本消息输入
     class KeyMonitor extends KeyAdapter {
         int num = 0;
 
@@ -318,11 +331,14 @@ public class ChatFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "不允许发送空消息", "错误",
                             JOptionPane.ERROR_MESSAGE);
                 } else {
+                    Date date = new Date();
                     ChatMsg msg = new ChatMsg();
                     msg.setDoc(txt_input.getStyledDocument());
                     msg.setUser(user);
                     msg.setTargetUser(targetUser);
+                    msg.setDate(date);
                     msg.send();
+                    msgs.add(msg);
                 }
             } else if (e.isControlDown() && e.isAltDown()
                     && e.getKeyCode() == KeyEvent.VK_A) {

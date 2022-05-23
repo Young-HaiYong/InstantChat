@@ -7,13 +7,15 @@ import java.util.List;
  * @author: 杨海勇
  **/
 public class User implements Serializable {
-    private int id;
-    private String name;
-    private String password;
-    private List<User> firends;
-    private int sex;//1：male 2:female
-    private int age;
-    private String birthday;
+    private static final long serialVersionUID = 1L;
+
+    private int id;//id
+    private String name;//用户名
+    private String password;//密码
+    private List<User> firends;//好友
+    private int sex;//0：男性 1:女性
+    private int age;//年龄
+    private String birthday;//生日
     private String imgPath;
     private boolean login;
     private String sign;

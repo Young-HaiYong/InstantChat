@@ -8,64 +8,66 @@ import java.io.Serializable;
 
 public abstract class Msg implements Serializable {
 
-	public static final int LOGIN_MSG = 1;
-	public static final int LOGIN_ERROR_MSG = 2;
-	public static final int LOGOUT_MSG = 0;
+    private static final long serialVersionUID = 1L;
+    public static final int LOGIN_MSG = 1;
+    public static final int LOGIN_ERROR_MSG = 2;
+    public static final int LOGOUT_MSG = 0;
 
-	protected int type;
-	protected User user, targetUser;
-	protected String ip;
-	protected int port;
+    protected int type;
+    protected User user;
+    protected User targetUser;
+    protected String ip;
+    protected int port;
 
-	public Msg() {
+    public Msg() {
 
-	}
+    }
 
-	public abstract void process(ChatClient client);
+    public abstract void process(ChatClient client);
 
-	public abstract void process(Server server);
+    public abstract void process(Server server);
 
-	public void send() {
-		ChatClient.getInstance().getNetClient().send(this);
-	}
+    public void send() {
+        ChatClient.getInstance().getNetClient().send(this);
+    }
 
-	public int getType() {
-		return type;
-	}
+    public int getType() {
+        return type;
+    }
 
-	public void setType(int type) {
-		this.type = type;
-	}
+    public void setType(int type) {
+        this.type = type;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public String getIp() {
-		return ip;
-	}
+    public String getIp() {
+        return ip;
+    }
 
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
 
-	public int getPort() {
-		return port;
-	}
+    public int getPort() {
+        return port;
+    }
 
-	public void setPort(int port) {
-		this.port = port;
-	}
+    public void setPort(int port) {
+        this.port = port;
+    }
 
-	public User getTargetUser() {
-		return targetUser;
-	}
+    public User getTargetUser() {
+        return targetUser;
+    }
 
-	public void setTargetUser(User targetUser) {
-		this.targetUser = targetUser;
-	}
+    public void setTargetUser(User targetUser) {
+        this.targetUser = targetUser;
+    }
 }

@@ -137,7 +137,7 @@ public class UserListPanel extends JPanel {
 
 		public void mouseEntered(MouseEvent e) {
 			JLabel l = (JLabel) e.getSource();
-			l.setForeground(Color.RED);
+			l.setForeground(Color.BLUE);
 		}
 
 		public void mouseExited(MouseEvent e) {

@@ -16,15 +16,15 @@ import java.util.Date;
 public class RegFrame extends JFrame {
 
 	public static final SimpleDateFormat FORMAT = new SimpleDateFormat(
-			"yyyy-MM-dd");
+			"yyyy-MM-dd HH:mm");
 
 	public static final int FRAME_WIDTH = 400;
 	public static final int FRAME_HEIGHT = 400;
 
-	public static final String HEAD1_PATH = "pictures\\h1.jpg";
-	public static final String HEAD2_PATH = "pictures\\h2.jpg";
-	public static final String HEAD3_PATH = "pictures\\h3.jpg";
-	public static final String HEAD4_PATH = "pictures\\h4.jpg";
+	public static final String HEAD1_PATH = "pictures\\h1.png";
+	public static final String HEAD2_PATH = "pictures\\h2.png";
+	public static final String HEAD3_PATH = "pictures\\h3.png";
+	public static final String HEAD4_PATH = "pictures\\h4.png";
 
 	private JTextField txt_name = new JTextField();
 	private JPasswordField txt_password1 = new JPasswordField();
@@ -42,9 +42,10 @@ public class RegFrame extends JFrame {
 	private JButton btn_cancel = new JButton("取消");
 	
 	
-//注册界面，暂时不用
+//注册界面
 	public RegFrame() {
 		super("用户注册");
+		this.setIconImage(new ImageIcon(RegFrame.class.getResource("/com/yhy/chat/view/assets/user.png")).getImage());
 		this.setLayout(null);
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -62,7 +63,7 @@ public class RegFrame extends JFrame {
 			bg.add(b);
 		}
 
-		JLabel l = new JLabel("选择头像");
+		JLabel l = new JLabel("头像");
 		l.setBounds(10, 10, 50, 30);
 		this.add(l);
 
@@ -129,11 +130,11 @@ public class RegFrame extends JFrame {
 
 		
 		
-		btn_submit.setBounds(100, 290, 50, 20);
+		btn_submit.setBounds(100, 290, 60, 30);
 		btn_submit.addActionListener(new Monitor());
 		this.add(btn_submit);
 
-		btn_cancel.setBounds(180, 290, 50, 20);
+		btn_cancel.setBounds(180, 290, 60, 30);
 		btn_cancel.addActionListener(new Monitor());
 		this.add(btn_cancel);
 

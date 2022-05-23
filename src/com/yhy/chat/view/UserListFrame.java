@@ -34,6 +34,7 @@ public class UserListFrame extends JFrame {
 		this.setLocation(1000, 100);
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setIconImage(new ImageIcon(LoginFrame.class.getResource("/com/yhy/chat/view/assets/user.png")).getImage());
 		this.setResizable(false);
 		this.addWindowListener(new WindowAdapter() {
 			public void windowIconified(WindowEvent e) {
@@ -166,9 +167,9 @@ public class UserListFrame extends JFrame {
 
 		lbl_name.setText(ChatClient.getInstance().getUser().getName());
 		lbl_name.setBounds(60, 20, 300, 30);
-		lbl_name.setFont(new Font("menlo", Font.BOLD,16));
+		lbl_name.setFont(new Font("menlo", Font.BOLD,18));
 		this.add(lbl_name);
-//模拟个性签名
+		//模拟个性签名
 		lbl_sign.setText(ChatClient.getInstance().getUser().getSign());
 		if (lbl_sign.getText().equals("")) {
 			lbl_sign.setText("请输入个性签名");

@@ -48,6 +48,10 @@
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/main/main/ChatClient.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/main/main/NetClient.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/main/main/Server.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/model/1/2.dat" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/model/1/2.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/model/2/1.dat" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/model/2/1.txt" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/model/User.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/model/msg/AcceptFileMsg.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/model/msg/AcceptFriendMsg.java" charset="GBK" />
@@ -70,7 +74,9 @@
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/utils/MyFont.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/utils/PropertiesUtil.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/ChatFrame.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/ChatRecordFrame.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/LoginFrame.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/MenuUserInfo.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/PasswordPanel.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/PopupFrame.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/RegFrame.java" charset="GBK" />
@@ -79,7 +85,12 @@
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/UserInfoPanel.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/UserListFrame.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/UserListPanel.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/assets/boytouxian1.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/assets/girltouxian.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/assets/icon.jpg" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/assets/icon1.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/assets/touxian1.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/yhy/chat/view/assets/userList.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/config.properties" charset="GBK" />
   </component>
 </project>

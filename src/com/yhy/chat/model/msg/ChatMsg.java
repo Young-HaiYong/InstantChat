@@ -3,6 +3,7 @@ package com.yhy.chat.model.msg;
 import com.yhy.chat.main.ChatClient;
 import com.yhy.chat.main.Server;
 import com.yhy.chat.model.User;
+import com.yhy.chat.utils.MyFont;
 import com.yhy.chat.view.ChatFrame;
 
 import javax.swing.*;
@@ -18,8 +19,13 @@ import java.util.List;
 public class ChatMsg extends SoundMsg {
 
 	public static final SimpleDateFormat FORMAT = new SimpleDateFormat(
-			"hh:mm:ss");
-
+			"yyyy-MM-dd HH:mm");
+	private static final long serialVersionUID = 1L;
+//	protected int type;
+//	protected User user;
+//	protected User targetUser;
+//	protected String ip;
+//	protected int port;
 	private byte[] buf;
 	private Date date;
 
@@ -34,7 +40,7 @@ public class ChatMsg extends SoundMsg {
 		return user1.equals(user2);
 	}
 
-	private static List<Element> getAllElements(Element[] roots) {
+	public static List<Element> getAllElements(Element[] roots) {
 		List<Element> elements = new LinkedList<Element>();
 		for (int i = 0; i < roots.length; i++) {
 			if (roots[i] == null) {
@@ -78,6 +84,7 @@ public class ChatMsg extends SoundMsg {
 			client.getUserListFrame().addUnreadMsg(this);
 			return;
 		}
+		//读取ChatMsg 返回消息内容给txt_display,在进行展示
 		List<Element> list = getAllElements(doc.getRootElements());
 		List<Icon> iconList = new ArrayList<Icon>();
 		SimpleAttributeSet sas = new SimpleAttributeSet();
@@ -108,8 +115,7 @@ public class ChatMsg extends SoundMsg {
 			for (int i = 0; i < doc.getText(0, doc.getLength()).length(); i++) {
 				cf.getTxt_display().setCaretPosition(
 						cf.getTxt_display().getStyledDocument().getLength());
-				if (((StyledDocument) doc).getCharacterElement(i).getName()
-						.equals("icon")) {
+				if (((StyledDocument) doc).getCharacterElement(i).getName().equals("icon")) {
 					cf.getTxt_display().insertIcon(iconList.remove(0));
 				} else {
 					cf.getTxt_display().getStyledDocument()
@@ -180,8 +186,7 @@ public class ChatMsg extends SoundMsg {
 			for (int i = 0; i < doc.getText(0, doc.getLength()).length(); i++) {
 				cf.getTxt_display().setCaretPosition(
 						cf.getTxt_display().getStyledDocument().getLength());
-				if (((StyledDocument) doc).getCharacterElement(i).getName()
-						.equals("icon")) {
+				if (((StyledDocument) doc).getCharacterElement(i).getName().equals("icon")) {
 					cf.getTxt_display().insertIcon(iconList.remove(0));
 				} else {
 					cf.getTxt_display().getStyledDocument()
@@ -215,13 +220,13 @@ public class ChatMsg extends SoundMsg {
 			doc = (StyledDocument) ois.readObject();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (ois != null) {
 				try {
 					ois.close();
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -250,6 +255,56 @@ public class ChatMsg extends SoundMsg {
 		}
 	}
 
+	public void display(StyledDocument doc) {
+		ChatFrame cf = null;
+		List<Element> list = getAllElements(doc.getRootElements());
+		List<Icon> iconList = new ArrayList<Icon>();
+		SimpleAttributeSet sas = new SimpleAttributeSet();
+		SimpleAttributeSet sas2 = new SimpleAttributeSet();
+		StyleConstants.setForeground(sas2, Color.GRAY);
+		for (int i = 0; i < list.size(); i++) {
+			Element e = list.get(i);
+			if (e.getName().equals("icon")) {
+				Icon icon = StyleConstants.getIcon(e.getAttributes());
+				iconList.add(icon);
+			} else if (e.getName().equals("content")) {
+				StyleConstants.setFontSize(sas, StyleConstants.getFontSize(e
+						.getAttributes()));
+				StyleConstants.setForeground(sas, StyleConstants
+						.getForeground(e.getAttributes()));
+				StyleConstants.setBold(sas, StyleConstants.isBold(e
+						.getAttributes()));
+				StyleConstants.setItalic(sas, StyleConstants.isItalic(e
+						.getAttributes()));
+				StyleConstants.setUnderline(sas, StyleConstants.isUnderline(e
+						.getAttributes()));
+			}
+		}
+		try {
+			cf.getTxt_display().getStyledDocument().insertString(
+					cf.getTxt_display().getStyledDocument().getLength(),
+					user.getName() + " " + FORMAT.format(date) + " :\n", sas2);
+			for (int i = 0; i < doc.getText(0, doc.getLength()).length(); i++) {
+				cf.getTxt_display().setCaretPosition(
+						cf.getTxt_display().getStyledDocument().getLength());
+				if (((StyledDocument) doc).getCharacterElement(i).getName().equals("icon")) {
+					cf.getTxt_display().insertIcon(iconList.remove(0));
+				} else {
+					cf.getTxt_display().getStyledDocument()
+							.insertString(
+									cf.getTxt_display().getStyledDocument()
+											.getLength(), doc.getText(i, 1),
+									sas);
+				}
+			}
+			cf.getTxt_display().getStyledDocument().insertString(
+					cf.getTxt_display().getStyledDocument().getLength(), "\n",
+					sas);
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public Date getDate() {
 		return date;
 	}
@@ -258,4 +313,11 @@ public class ChatMsg extends SoundMsg {
 		this.date = date;
 	}
 
+	public byte[] getBuf() {
+		return buf;
+	}
+
+	public void setBuf(byte[] buf) {
+		this.buf = buf;
+	}
 }

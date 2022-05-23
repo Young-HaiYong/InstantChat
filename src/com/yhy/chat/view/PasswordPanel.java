@@ -3,6 +3,7 @@ package com.yhy.chat.view;
 import com.yhy.chat.main.ChatClient;
 import com.yhy.chat.model.User;
 import com.yhy.chat.model.msg.UpdateUserMsg;
+import com.yhy.chat.utils.MyFont;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -30,31 +31,36 @@ public class PasswordPanel extends JPanel {
 	//修改密码窗口
 	public void init() {
 		JLabel l = new JLabel("原密码：");
-		l.setBounds(10, 10, 50, 25);
+		l.setFont(MyFont.getSonFont());
+		l.setBounds(10, 10, 60, 25);
 		this.add(l);
 
 		txt_old.setBounds(70, 10, 120, 25);
 		this.add(txt_old);
 
 		l = new JLabel("新密码：");
-		l.setBounds(10, 45, 50, 25);
+		l.setFont(MyFont.getSonFont());
+		l.setBounds(10, 45, 60, 25);
 		this.add(l);
 
 		txt_new1.setBounds(70, 45, 120, 25);
 		this.add(txt_new1);
 
 		l = new JLabel("确认密码：");
+		l.setFont(MyFont.getSonFont());
 		l.setBounds(10, 80, 70, 25);
 		this.add(l);
 
 		txt_new2.setBounds(70, 80, 120, 25);
 		this.add(txt_new2);
 
-		btn_submit.setBounds(100, 290, 50, 20);
+		btn_submit.setBounds(100, 290, 60, 30);
+		btn_submit.setFont(MyFont.getSonFont());
 		btn_submit.addActionListener(new Monitor());
 		this.add(btn_submit);
 
-		btn_cancel.setBounds(180, 290, 50, 20);
+		btn_cancel.setBounds(180, 290, 60, 30);
+		btn_cancel.setFont(MyFont.getSonFont());
 		btn_cancel.addActionListener(new Monitor());
 		this.add(btn_cancel);
 

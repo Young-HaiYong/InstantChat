@@ -103,7 +103,7 @@ public class NetClient {
 			e.printStackTrace();
 		}
 	}
-
+	//管理TCP线程
 	class TCPThread implements Runnable {
 
 		public void run() {

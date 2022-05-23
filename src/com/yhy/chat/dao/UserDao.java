@@ -38,7 +38,6 @@ public class UserDao extends BaseDao {
             close(conn);
         }
     }
-
     //查询数据库中是否存在该用户，用于登录验证
     public boolean existName(String name) {
         Connection conn = getConnection();
@@ -93,9 +92,10 @@ public class UserDao extends BaseDao {
     //查询好友函数
     public List<User> getFriends(User user) {
         Connection conn = getConnection();
-        String sql = "select u.* from friends join user u on friends.user_id2 = u.id where friends.user_id1 = ? "
-                + "union "
-                + "select u.* from friends join user u on friends.user_id1 = u.id where friends.user_id2 = ?";
+
+        String sql = "select u.* from friends join user u on friends.user_id2 = u.id where friends.user_id1 = ? " +
+                "union " +
+                "select u.* from friends join user u on friends.user_id1 = u.id where friends.user_id2 = ?";
         PreparedStatement ps = this.prepare(conn, sql);
         ResultSet rs = null;
         List<User> list = new ArrayList<User>();
