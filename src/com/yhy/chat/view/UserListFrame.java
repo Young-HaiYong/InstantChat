@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.*;
 /**
  * @author: 杨海勇
+ * 主界面 展示好友界面
  **/
 public class UserListFrame extends JFrame {
 

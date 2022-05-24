@@ -32,6 +32,7 @@ import java.util.List;
 
 /**
  * @author: Ñîº£ÓÂ
+ * ÁÄÌì´°¿Ú
  **/
 public class ChatFrame extends JFrame {
 
@@ -41,7 +42,6 @@ public class ChatFrame extends JFrame {
             "yyyy-MM-dd HH:mm");
 
     private File file;
-   // private Date date = new Date();
     private FileOutputStream fos;
     private long length;
     private User user;
@@ -150,11 +150,6 @@ public class ChatFrame extends JFrame {
                 ChatFrame.this.dispose();
             }
         });
-//        ImageIcon image = new ImageIcon(LoginFrame.class.getResource("/com/yhy/chat/view/assets/user.png"));
-//        image.setImage(image.getImage().getScaledInstance(140,80,Image.SCALE_DEFAULT));
-//        JLabel lbl_title = new JLabel(image);
-//        lbl_title.setBounds(72, -10, 200, 100);
-//        this.add(lbl_title);
 
         this.setIconImage(new ImageIcon(ChatFrame.class.getResource("/com/yhy/chat/view/assets/chat.png")).getImage());
         this.setLocation(150, 100);

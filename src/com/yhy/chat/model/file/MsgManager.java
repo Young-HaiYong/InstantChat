@@ -10,9 +10,11 @@ import java.util.*;
 
 /**
  * @author: 杨海勇
+ * 实现对聊天记录的存储和加载
  **/
 public class MsgManager {
 
+    //存储聊天记录
     public static void saveMsg(User u1, User u2, ArrayList<ChatMsg> chatMsgs) throws IOException {
         boolean toDo = true;
         if (u2 == null){
@@ -21,16 +23,12 @@ public class MsgManager {
 
         if (toDo) {
             File file = new File(FileFolder.getDefaultDirectory() + "/" + u1.getId() + "/" + u2.getId() + ".dat");
-            boolean isexist = false;
 
             if (!file.exists()) {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
             }
             FileOutputStream fos = new FileOutputStream(file, true);
-//        ObjectOutputStreamForAddObject addObject = ObjectOutputStreamForAddObject.newInstance(file,fos);
-//        ObjectOutputStream outputStream = new ObjectOutputStream(fos);
-//        long pos = 0;
             try {
                 if (file.exists()) {
                     MyObjectOutputStream out = new MyObjectOutputStream(fos);
@@ -47,26 +45,16 @@ public class MsgManager {
                     out.flush();
                     out.close();
                 }
-                //            fos.close();
-                //            if (isexist) {
-                //                pos = fos.getChannel().position() - 4;
-                //                fos.getChannel().truncate(pos);
-                //            }
-                //            for (ChatMsg msg : chatMsgs) {
-                //                outputStream.writeObject(msg);
-                //            }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 fos.close();
             }
-
-//            outputStream.close();
         }
 
     }
 
-
+    //读取聊天记录
     public static ArrayList<ChatMsg> readMsg(User u1, User u2) throws IOException {
         File file = new File(FileFolder.getDefaultDirectory() + "/" + u1.getId() + "/" + u2.getId() + ".dat");
         ArrayList<ChatMsg> resList = new ArrayList<>();
@@ -85,12 +73,7 @@ public class MsgManager {
         } catch (ClassNotFoundException e) {
             System.out.println("over");
         } catch (EOFException e) {
-//            System.out.println("EOFERROR");
-//            for(ChatMsg msg : resList) {
-//                System.out.println(msg);
-//            }
-            //  inputStream.close();
-//            return resList;
+
         } finally {
             inputStream.close();
             return resList;
@@ -98,8 +81,7 @@ public class MsgManager {
 
     }
 
-
-
+    //重写ObjectOutputStream 实现对象追加的存储
     static class MyObjectOutputStream extends ObjectOutputStream {
 
         public MyObjectOutputStream(OutputStream os) throws IOException, SecurityException {
@@ -112,7 +94,7 @@ public class MsgManager {
         }
     }
 
-
+    //重写ObjectInputStream 实现对对象追加的存储文件的读取
     static class MyObjectInputStream extends ObjectInputStream {
 
         public MyObjectInputStream(InputStream in) throws IOException {

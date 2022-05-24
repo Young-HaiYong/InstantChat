@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 /**
  * @author: Ñîº£ÓÂ
+ * ×¢²á½çÃæ
  **/
 public class RegFrame extends JFrame {
 

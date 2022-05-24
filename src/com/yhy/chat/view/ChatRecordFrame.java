@@ -22,6 +22,7 @@ import static com.yhy.chat.model.msg.ChatMsg.getAllElements;
 
 /**
  * @author: 杨海勇
+ * 聊天记录窗口
  **/
 public class ChatRecordFrame extends JFrame {
 
@@ -125,7 +126,7 @@ public class ChatRecordFrame extends JFrame {
         try {
             this.getTxt_display().getStyledDocument().insertString(
                     this.getTxt_display().getStyledDocument().getLength(),
-                    msg.getUser().getName() +" 对 "+ msg.getTargetUser().getName()+ " " + FORMAT.format(date) + ":\n", sas2);
+                    msg.getUser().getName() + " 对 " + msg.getTargetUser().getName() + " " + FORMAT.format(date) + ":\n", sas2);
             for (int i = 0; i < doc.getText(0, doc.getLength()).length(); i++) {
                 this.getTxt_display().setCaretPosition(
                         this.getTxt_display().getStyledDocument().getLength());
@@ -186,11 +187,16 @@ public class ChatRecordFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == btn_delete) {
-                File file = new File(FileFolder.getDefaultDirectory() + "/" + user.getId() + "/" + targetUser.getId() + ".dat");
-                if (file.delete()) {
-                    System.out.println("Deleted the file: " + file.getName());
+                File fileUser = new File(FileFolder.getDefaultDirectory() + "/" + user.getId() + "/" + targetUser.getId() + ".dat");
+                File fileTargetUser = new File(FileFolder.getDefaultDirectory() + "/" + targetUser.getId() + "/" + user.getId() + ".dat");
+                if ((fileUser.delete() && fileTargetUser.delete())
+                || (!fileUser.delete()&& fileTargetUser.delete())||(fileUser.delete()&&!fileTargetUser.delete())
+                ) {
+                    JOptionPane.showMessageDialog(null, "删除成功", "成功",
+                            JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    System.out.println("Failed to delete the file.");
+                    JOptionPane.showMessageDialog(null, "聊天记录已空", "错误",
+                            JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }

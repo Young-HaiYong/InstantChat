@@ -14,7 +14,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @author: Ñîº£ÓÂ
+ * ·þÎñ¶Ë
+ **/
 public class Server {
 
 	public static final String PROPERTIES_PATH = "config.properties";

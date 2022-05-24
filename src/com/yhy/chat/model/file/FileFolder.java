@@ -4,6 +4,7 @@ import java.io.File;
 
 /**
  * @author: 杨海勇
+ * 默认文件存储路径工具类
  **/
 public class FileFolder {
 

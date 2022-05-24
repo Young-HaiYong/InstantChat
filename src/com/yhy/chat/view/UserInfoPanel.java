@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 /**
  * @author: 杨海勇
+ * 个人消息及修改信息，注册个人信息界面
  **/
 public class UserInfoPanel extends JPanel {
 

@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author: 杨海勇
+ * 客户端主程序
+ **/
+
 public class ChatClient {
 
 	public static final String PROPERTIES_PATH = "config.properties";

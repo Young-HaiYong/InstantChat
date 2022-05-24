@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 /**
  * @author: Ñîº£ÓÂ
+ * µÇÂ¼½çÃæ
  **/
 public class LoginFrame extends JFrame {
 

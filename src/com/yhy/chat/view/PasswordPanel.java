@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 /**
  * @author: 杨海勇
+ * 修改密码窗口功能实现
  **/
 public class PasswordPanel extends JPanel {
 

@@ -3,6 +3,7 @@ package com.yhy.chat.utils;
 import java.awt.*;
 /**
  * @author: 杨海勇
+ * 字体工具类
  **/
 public class MyFont {
 	public static Font getFont() {

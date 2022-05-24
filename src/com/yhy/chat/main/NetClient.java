@@ -8,7 +8,10 @@ import java.io.*;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
+/**
+ * @author: 杨海勇
+ * 实现客户端与服务端之间建立连接
+ **/
 public class NetClient {
 
 	public static final int LOGIN_MSG = 1;
