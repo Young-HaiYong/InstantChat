@@ -142,7 +142,7 @@ public class UserDao extends BaseDao {
     //删除好友函数
     public boolean removeFriend(User user1, User user2) {
         Connection conn = getConnection();
-        String sql = "delete from friends where ( user_id1 = ? and user_id2 = ? ) or ( user_id2 = ? and user_id1 = ? )";
+        String sql = "delete from friends where ( user_id1 = ? and user_id2 = ? ) or ( user_id2 = ? and user_id1 = ? );";
         PreparedStatement ps = this.prepare(conn, sql);
         try {
             ps.setInt(1, user1.getId());
