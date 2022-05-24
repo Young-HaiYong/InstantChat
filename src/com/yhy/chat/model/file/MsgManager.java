@@ -14,24 +14,56 @@ import java.util.*;
 public class MsgManager {
 
     public static void saveMsg(User u1, User u2, ArrayList<ChatMsg> chatMsgs) throws IOException {
-        File file = new File(FileFolder.getDefaultDirectory() + "/" + u1.getId() + "/" + u2.getId() + ".dat");
-
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+        boolean toDo = true;
+        if (u2 == null){
+            toDo = false;
         }
-        FileOutputStream fos = new FileOutputStream(file);
-        ObjectOutputStream outputStream = new ObjectOutputStream(fos);
 
-        try {
-            for (ChatMsg msg : chatMsgs) {
-                outputStream.writeObject(msg);
+        if (toDo) {
+            File file = new File(FileFolder.getDefaultDirectory() + "/" + u1.getId() + "/" + u2.getId() + ".dat");
+            boolean isexist = false;
+
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
             }
-        } finally {
-            outputStream.flush();
-            fos.close();
-            outputStream.close();
+            FileOutputStream fos = new FileOutputStream(file, true);
+//        ObjectOutputStreamForAddObject addObject = ObjectOutputStreamForAddObject.newInstance(file,fos);
+//        ObjectOutputStream outputStream = new ObjectOutputStream(fos);
+//        long pos = 0;
+            try {
+                if (file.exists()) {
+                    MyObjectOutputStream out = new MyObjectOutputStream(fos);
+                    for (ChatMsg msg : chatMsgs) {
+                        out.writeObject(msg);
+                    }
+                    out.flush();
+                    out.close();
+                } else {
+                    ObjectOutputStream out = new ObjectOutputStream(fos);
+                    for (ChatMsg msg : chatMsgs) {
+                        out.writeObject(msg);
+                    }
+                    out.flush();
+                    out.close();
+                }
+                //            fos.close();
+                //            if (isexist) {
+                //                pos = fos.getChannel().position() - 4;
+                //                fos.getChannel().truncate(pos);
+                //            }
+                //            for (ChatMsg msg : chatMsgs) {
+                //                outputStream.writeObject(msg);
+                //            }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                fos.close();
+            }
+
+//            outputStream.close();
         }
+
     }
 
 
@@ -42,7 +74,7 @@ public class MsgManager {
         if (!file.exists() || file.isDirectory()) {
             return resList;
         }
-        ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file));
+        ObjectInputStream inputStream = new MyObjectInputStream(new FileInputStream(file));
 
         try {
             while (true) {
@@ -66,4 +98,29 @@ public class MsgManager {
 
     }
 
+
+
+    static class MyObjectOutputStream extends ObjectOutputStream {
+
+        public MyObjectOutputStream(OutputStream os) throws IOException, SecurityException {
+            super(os);
+        }
+
+        @Override
+        protected void writeStreamHeader() throws IOException {
+            super.reset();
+        }
+    }
+
+
+    static class MyObjectInputStream extends ObjectInputStream {
+
+        public MyObjectInputStream(InputStream in) throws IOException {
+            super(in);
+        }
+
+        @Override
+        protected void readStreamHeader() throws IOException, StreamCorruptedException {
+        }
+    }
 }

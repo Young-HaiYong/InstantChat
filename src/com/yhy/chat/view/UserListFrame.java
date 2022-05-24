@@ -220,6 +220,7 @@ public class UserListFrame extends JFrame {
 				ChatFrame cf = new ChatFrame(
 						ChatClient.getInstance().getUser(), null);
 				ChatClient.getInstance().getChatFrameList().add(cf);
+				cf.getBtn_chattingRecords().setVisible(false);
 			}
 		});
 		this.add(btn_chatAll);

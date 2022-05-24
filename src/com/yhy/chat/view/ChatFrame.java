@@ -156,7 +156,7 @@ public class ChatFrame extends JFrame {
 //        lbl_title.setBounds(72, -10, 200, 100);
 //        this.add(lbl_title);
 
-        this.setIconImage(new ImageIcon(ChatFrame.class.getResource("/com/yhy/chat/view/assets/user.png")).getImage());
+        this.setIconImage(new ImageIcon(ChatFrame.class.getResource("/com/yhy/chat/view/assets/chat.png")).getImage());
         this.setLocation(150, 100);
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setResizable(false);
@@ -408,6 +408,14 @@ public class ChatFrame extends JFrame {
             return false;
         }
         return cf.user.equals(user) && cf.targetUser.equals(targetUser);
+    }
+
+    public JButton getBtn_chattingRecords() {
+        return btn_chattingRecords;
+    }
+
+    public void setBtn_chattingRecords(JButton btn_chattingRecords) {
+        this.btn_chattingRecords = btn_chattingRecords;
     }
 
     public File getFile() {

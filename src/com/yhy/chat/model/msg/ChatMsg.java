@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ChatMsg extends SoundMsg {
+public class ChatMsg extends SoundMsg implements Serializable {
 
 	public static final SimpleDateFormat FORMAT = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm");

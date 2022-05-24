@@ -15,8 +15,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
 
 import static com.yhy.chat.model.msg.ChatMsg.getAllElements;
@@ -34,15 +33,18 @@ public class ChatRecordFrame extends JFrame {
 
     private User user;
     private User targetUser;
-    private ArrayList<ChatMsg> msgs = new ArrayList<>();
+    private ArrayList<ChatMsg> userMsg = new ArrayList<>();
+    private ArrayList<ChatMsg> targetUserMsg = new ArrayList<>();
+    private ArrayList<ChatMsg> allMsg = new ArrayList<>();
     private JButton btn_delete = new JButton("删除记录");
     private JTextPane txt_display = new JTextPane();
 
     public ChatRecordFrame(User user, User targetUser) throws Exception {
-        super("聊天记录 " + "用户： " + user.getName() + "对" + "用户：" + targetUser.getName());
+        super("聊天记录 " + "用户:" + user.getName() + "与" + "用户:" + targetUser.getName());
         this.user = user;
         this.targetUser = targetUser;
         showChat();
+        this.setIconImage(new ImageIcon(ChatRecordFrame.class.getResource("/com/yhy/chat/view/assets/chatrecord.png")).getImage());
         this.setLocation(150, 100);
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setResizable(false);
@@ -52,24 +54,33 @@ public class ChatRecordFrame extends JFrame {
 
         SimpleAttributeSet sas3 = new SimpleAttributeSet();
         StyleConstants.setForeground(sas3, Color.GRAY);
-        msgs.addAll(MsgManager.readMsg(user, targetUser));
+        //获取聊天信息记录对象
+        userMsg.addAll(MsgManager.readMsg(user, targetUser));
+        targetUserMsg.addAll(MsgManager.readMsg(targetUser, user));
+        allMsg.addAll(userMsg);
+        allMsg.addAll(targetUserMsg);
+
+        //界面
         this.setLayout(null);
         JScrollPane sp = new JScrollPane(txt_display,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         txt_display.setEditable(false);
-        sp.setBounds(20, 50, 350, FRAME_HEIGHT);
+        sp.setBounds(20, 40, 350, 320);
         this.add(sp);
         btn_delete.setBounds(380, 90, 100, 30);
         btn_delete.setFont(new Font("menlo", Font.BOLD, 12));
         btn_delete.addActionListener(new Moniter());
         this.add(btn_delete);
 
+        //处理聊天消息
 
-        if (msgs.isEmpty()) {
+
+        if (allMsg.isEmpty() && targetUserMsg.isEmpty() && userMsg.isEmpty()) {
             this.getTxt_display().getStyledDocument().insertString(0, "聊天记录为空", sas3);
         } else {
-            for (ChatMsg msg : msgs) {
+            arrayListSort(allMsg);
+            for (ChatMsg msg : allMsg) {
                 process(msg);
             }
 
@@ -82,6 +93,7 @@ public class ChatRecordFrame extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
     }
+
     //解包消息
     public void process(ChatMsg msg) {
         Date date = msg.getDate();
@@ -113,7 +125,7 @@ public class ChatRecordFrame extends JFrame {
         try {
             this.getTxt_display().getStyledDocument().insertString(
                     this.getTxt_display().getStyledDocument().getLength(),
-                    user.getName() + " " + FORMAT.format(date) + " :\n", sas2);
+                    msg.getUser().getName() +" 对 "+ msg.getTargetUser().getName()+ " " + FORMAT.format(date) + ":\n", sas2);
             for (int i = 0; i < doc.getText(0, doc.getLength()).length(); i++) {
                 this.getTxt_display().setCaretPosition(
                         this.getTxt_display().getStyledDocument().getLength());
@@ -135,6 +147,41 @@ public class ChatRecordFrame extends JFrame {
         }
     }
 
+    //按时间升序比较
+    private static void arrayListSort(ArrayList<ChatMsg> list) {
+        Iterator<ChatMsg> iterator = list.iterator();
+        if (iterator.hasNext()) {
+            ChatMsg next = iterator.next();
+            if (next == null) {
+                iterator.remove();
+            }
+        }
+        Collections.sort(list, new Comparator<ChatMsg>() {
+            @Override
+            public int compare(ChatMsg o1, ChatMsg o2) {
+                try {
+                    if (o1.getDate() == null || o2.getDate() == null) {
+                        return 1;
+                    }
+                    Date dt1 = o1.getDate();
+                    Date dt2 = o2.getDate();
+
+                    if (dt1.getTime() < dt2.getTime()) {
+                        return -1;
+                    } else if (dt1.getTime() > dt2.getTime()) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+        });
+    }
+
+    //监控删除聊天记录按钮
     class Moniter implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
