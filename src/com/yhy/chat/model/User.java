@@ -1,6 +1,8 @@
 package com.yhy.chat.model;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.AbstractList;
 import java.util.List;
 
 /**
