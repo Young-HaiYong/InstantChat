@@ -126,7 +126,7 @@ public class ChatFrame extends JFrame {
     private Color color = Color.BLACK;
 
     public ChatFrame(User user, User targetUser) {
-        super(user.getName()+ "  正在与  " + (targetUser == null ? "大家" : targetUser.getName())
+        super(user.getName()+ "  正在与 " + (targetUser == null ? "大家" : targetUser.getName())
                 + " 聊天");
         this.user = user;
         this.targetUser = targetUser;
@@ -251,6 +251,12 @@ public class ChatFrame extends JFrame {
                             JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+//                Frame frame = new Frame();
+//                FileDialog fd = new FileDialog(frame,"选择文件",FileDialog.LOAD);
+//                fd.setVisible(true);// 设置可见
+//                if (true){
+//
+//                }
                 JFileChooser chooser = new JFileChooser();
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     if (!new File(chooser.getSelectedFile().getAbsolutePath())

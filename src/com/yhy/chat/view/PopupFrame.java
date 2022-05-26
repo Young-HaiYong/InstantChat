@@ -27,6 +27,7 @@ public class PopupFrame {
 				Toolkit.getDefaultToolkit().getScreenSize().width - 250,
 				Toolkit.getDefaultToolkit().getScreenSize().height - 220);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//		frame.setUndecorated(true);
 		ImageIcon img = new ImageIcon(user.getImgPath());
 		img.setImage(img.getImage().getScaledInstance(40, 40,
 				Image.SCALE_DEFAULT));
@@ -34,7 +35,7 @@ public class PopupFrame {
 		lbl_head.setBounds(20, 20, 40, 40);
 		frame.add(lbl_head);
 
-		JLabel lbl_name = new JLabel(user.getName() + " 上线了");
+		JLabel lbl_name = new JLabel(user.getName() + "上线了");
 		lbl_name.setBounds(70, 20, 100, 30);
 		frame.add(lbl_name);
 
@@ -78,10 +79,12 @@ public class PopupFrame {
 	public static class Tim1 implements ActionListener {// 控制窗口关闭时透明度的渐变
 		public void actionPerformed(ActionEvent e) {
 			value1 -= 0.02f;
+			//frame.setUndecorated(true);
 			if (value1 >= 0.02f) {
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
+
 						com.sun.awt.AWTUtilities.setWindowOpacity(frame, value1);
 					}
 				});
